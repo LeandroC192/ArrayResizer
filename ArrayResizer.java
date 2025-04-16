@@ -5,8 +5,18 @@ public class ArrayResizer {
      * Precondition: r is a valid row index in array2D.
      * Postcondition: array2D is unchanged.
      */
-    public static boolean isNonZeroRow(int[][] array2D, int r) {
-        /* to be implemented in part (a) */ }
+    public static boolean isNonZeroRow(int[][] array2D, int r) 
+    {
+        for(int i : array2D[r])
+        {
+            if(i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+        /* to be implemented in part (a) */ 
+    }
 
 
     /**
@@ -14,9 +24,19 @@ public class ArrayResizer {
      * all non-zero values.
      * Postcondition: array2D is unchanged.
      */
-    public static int numNonZeroRows(int[][] array2D) {
-        /* implementation not shown */ }
-
+    public static int numNonZeroRows(int[][] array2D) 
+    {
+        int rows = 0;
+        for(int row = 0; row < array2D.length; row++)
+        {
+            if(isNonZeroRow(array2D, row))
+            {
+                rows++;
+            }
+        }
+        return rows;
+        /* implementation not shown */ 
+    }
 
     /**
      * Returns a new, possibly smaller, two-dimensional array
@@ -26,6 +46,21 @@ public class ArrayResizer {
      * at least one row with no zeros.
      * Postcondition: array2D is unchanged.
      */
-    public static int[][] resize(int[][] array2D) {
-        /* to be implemented in part (b) */ }
+    public static int[][] resize(int[][] array2D) 
+    {
+        int rows = numNonZeroRows(array2D);
+        int cols = array2D[0].length;
+        int [][] arr = new int[rows][cols];
+        int r = 0;
+        for(int row = 0; row < array2D.length; row++)
+        {
+            if(isNonZeroRow(array2D, row))
+            {
+                arr[r] = array2D[row];
+                r++;
+            }
+        }
+        return arr;
+        /* to be implemented in part (b) */ 
+    }
 }
